@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Instant WhatsApp Invoice Generator</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef2f5; padding: 15px; margin: 0; }
+    .container { max-width: 500px; background: white; padding: 20px; margin: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #075e54; margin-bottom: 20px; }
+    label { font-weight: bold; font-size: 14px; color: #333; display: block; margin-top: 10px; }
+    input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    .btn { width: 100%; padding: 12px; margin-top: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+    .btn-wa { background-color: #25D366; color: white; }
+    .btn-print { background-color: #007bff; color: white; }
+    .ad-box { background: #f8f9fa; border: 1px dashed #bbb; text-align: center; padding: 15px; margin: 15px 0; font-size: 12px; color: #777; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>रसीद / बिल बनाएं</h2>
+
+  <div class="ad-box">Advertisement Area (Google AdSense)</div>
+
+  <label>आपकी दुकान / व्यापार का नाम:</label>
+  <input type="text" id="shopName" placeholder="उदा. शर्मा जनरल स्टोर">
+
+  <label>ग्राहक का नाम:</label>
+  <input type="text" id="custName" placeholder="उदा. राहुल कुमार">
+
+  <label>ग्राहक का WhatsApp नंबर (Country Code के साथ):</label>
+  <input type="number" id="custPhone" placeholder="उदा. 919876543210">
+
+  <label>सामान का विवरण (Item Name):</label>
+  <input type="text" id="itemDetails" placeholder="उदा. 2 टी-शर्ट, 1 जींस">
+
+  <label>कुल राशि (Total Amount ₹):</label>
+  <input type="number" id="totalAmount" placeholder="उदा. 1500">
+
+  <button class="btn btn-wa" onclick="sendWhatsApp()">WhatsApp पर बिल भेजें</button>
+  <button class="btn btn-print" onclick="window.print()">रसीद प्रिंट / PDF सेव करें</button>
+
+  <div class="ad-box">Advertisement Area (Google AdSense)</div>
+</div>
+
+<script>
+  function sendWhatsApp() {
+    var shop = document.getElementById('shopName').value;
+    var name = document.getElementById('custName').value;
+    var phone = document.getElementById('custPhone').value;
+    var item = document.getElementById('itemDetails').value;
+    var amount = document.getElementById('totalAmount').value;
+
+    if(!phone || !name || !amount) {
+      alert("कृपया सभी जानकारी भरें!");
+      return;
+    }
+
+    var msg = `*--- ${shop || 'इन्वॉयस/रसीद'} ---*%0A` +
+              `नमस्ते *${name}* जी,%0A%0A` +
+              `आपके सामान का विवरण नीचे दिया गया है:%0A` +
+              `*सामान:* ${item}%0A` +
+              `*कुल राशि:* ₹${amount}%0A%0A` +
+              `धन्यवाद! फिर सेवा का अवसर दें।`;
+
+    var waUrl = `https://wa.me/${phone}?text=${msg}`;
+    window.open(waUrl, '_blank');
+  }
+</script>
+
+</body>
+</html>
